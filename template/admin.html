@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h2 class="mt-5">Administração de Usuários</h2>
+        <ul class="list-group">
+            {% for user in users %}
+            <li class="list-group-item">
+                <strong>Usuário:</strong> {{ user.username }} |
+                <strong>Admin:</strong> {{ user.is_admin }}
+            </li>
+            {% endfor %}
+        </ul>
+        <a href="/logout" class="btn btn-secondary mt-4">Logout</a>
+    </div>
+</body>
+</html>
