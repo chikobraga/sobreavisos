@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard do Usuário</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h2 class="mt-5">Dashboard</h2>
+        <h3>Sobreavisos</h3>
+        <form method="POST" action="/add_overtime">
+            <div class="form-group">
+                <label for="date">Data:</label>
+                <input type="date" class="form-control" id="date" name="date" required>
+            </div>
+            <div class="form-group">
+                <label for="start_time">Hora de Início:</label>
+                <input type="time" class="form-control" id="start_time" name="start_time" required>
+            </div>
+            <div class="form-group">
+                <label for="end_time">Hora de Fim:</label>
+                <input type="time" class="form-control" id="end_time" name="end_time" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Adicionar Sobreaviso</button>
+        </form>
+
+        <h3 class="mt-5">Horas Trabalhadas</h3>
+        <ul class="list-group">
+            {% for overtime in overtimes %}
+            <li class="list-group-item">
+                <strong>Data:</strong> {{ overtime.date }} |
+                <strong>Início:</strong> {{ overtime.start_time }} |
+                <strong>Fim:</strong> {{ overtime.end_time }}
+                <form method="POST" action="/add_work_entry/{{ overtime.id }}" class="mt-2">
+                    <div class="form-group">
+                        <label for="entry_time">Hora de Entrada:</label>
+                        <input type="time" class="form-control" id="entry_time" name="entry_time" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="exit_time">Hora de Saída:</label>
+                        <input type="time" class="form-control" id="exit_time" name="exit_time" required>
+                    </div>
+                    <button type="submit" class="btn btn-success">Adicionar Horas Trabalhadas</button>
+                </form>
+            </li>
+            {% endfor %}
+        </ul>
+        
+        <a href="/export" class="btn btn-info mt-4">Exportar para Excel</a>
+        <a href="/logout" class="btn btn-secondary mt-4">Logout</a>
+    </div>
+</body>
+</html>
